@@ -1,0 +1,79 @@
+image: alteroo/roo-theme-deploy:latest
+#node:latest
+
+stages:
+  - build
+  - deploy
+
+before_script:
+ - HASH=$(echo $CI_COMMIT_SHA | cut -c1-10)
+ - sed -i "s/title = [[Theme name]] Theme/title = [[Theme name]] $HASH/g" manifest.cfg
+ - sed -i "s/baseVersion/$HASH/g" manifest.cfg
+ - sed -i "s/baseVersion/$HASH/g" custom-css.xml
+ - sed -i "s/baseVersion/$HASH/g" custom.xml
+ - cat manifest.cfg
+ - cat custom-css.xml
+ - cat custom.xml
+ - lessc styles.less styles.css --source-map=styles.css.map
+
+build_less_file:
+  stage: build
+  script:
+   - cat styles.css.map
+
+on_success_upload_theme_to_staging:
+  stage: deploy
+  script:
+   - echo $theme_cookie > ../.plonetheme-upload-cookie
+   - REPONAME=$(basename "$PWD");
+   - mkdir ../deploy
+   - cd ..
+   - cp -r $REPONAME deploy/
+   - cd deploy/$REPONAME
+   - /bin/bash clean.sh
+   - rm clean.sh
+   - cd ../
+   - echo $theme_cookie > .plonetheme-upload-cookie
+   - TESTOUTPUT=$(plonetheme-upload --enable $REPONAME $STAGING_TARGET_URL)
+   - if [[ $TESTOUTPUT = *"Upload successful"* ]]; then echo "SUCCESS"; else echo "FAIL"; exit 1; fi
+  only:
+   - master
+  when: on_success
+  environment:
+   name: staging
+
+on_success_upload_theme_to_production:
+  stage: deploy
+  script:
+   
+   - REPONAME=$(basename "$PWD");
+   - mkdir ../deploy
+   - cd ..
+   - cp -r $REPONAME deploy/
+   - cd deploy/$REPONAME
+   - /bin/bash clean.sh
+   - rm clean.sh
+   - cd ../
+   - echo $theme_cookie > .plonetheme-upload-cookie
+   - /bin/bash
+   - TESTOUTPUT=$(plonetheme-upload --enable $REPONAME $MAIN_TARGET_URL)
+   - if [[ $TESTOUTPUT = *"Upload successful"* ]]; then echo "SUCCESS"; else echo "FAIL"; exit 1; fi
+  only:
+   - tags
+  when: on_success
+  environment:
+   name: production
+
+pages:
+  stage: deploy
+  script:
+  - mkdir .public
+  - cp -r * .public
+  - mv .public public
+  artifacts:
+    paths:
+    - public
+  only:
+   - master
+
+
