@@ -1,0 +1,229 @@
+@import "static/variables.less";
+@import "static/base.less";
+@import "static/functions.less";
+@import "static/custom.less";
+
+
+/* Customize whatever you want 
+@plone-sitenav-bg: pink;
+@plone-sitenav-link-hover-bg: darken(pink, 20%);
+.plone-nav > li > a {
+  color: @plone-text-color;
+}
+*/
+body {
+    a:hover,
+    a:focus {
+        color: #004666;
+        text-decoration: none;
+    }
+}
+
+/* adjust the navbar to fit the plone-toolbar */
+.plone-toolbar-left .navbar.w-nav{
+   margin-left: @plone-left-toolbar;
+}
+.plone-toolbar-left-expanded  .navbar.w-nav{
+    margin-left:@plone-left-toolbar-expanded;
+}
+table > thead > tr > th,
+table > tbody > tr > th,
+table > tfoot > tr > th,
+body table > thead > tr > td,
+body table > tbody > tr > td,
+body table > tfoot > tr > td {
+  border: 0px solid transparent;
+}
+body table {
+    width: 100%;
+    max-width: 100%;
+    border: 0px solid transparent;
+}
+.gl-fieldset {position:relative;}
+.gl-checkbox-input{position:relative;left:40px}
+.gl-form-label{position:relative;left:40px;}
+.plone-breadcrumb {
+  margin-bottom: 0px;
+}
+
+/* portlets */
+
+section.portlet.portletEvents {
+    border-color:transparent;
+}
+
+.portletEvents a.tile {
+    margin-top: 0px;
+    margin-bottom: 4px;
+    font-family: Lato, sans-serif;
+    color: #e8e8e8;
+    font-size: 13px;
+    line-height: 115%;
+    font-weight: 900;
+    text-transform: uppercase;
+    display: block;
+    padding-top: 6px;
+    padding-bottom: 4px;
+    padding-left: 26px;
+    background-image: url(http://uploads.webflow.com/540a03d46774599c3d7ef011/540a9c5c6774599c3d7ef76d_news-256-grey.png);
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position-y: 2px;
+}
+.portlet .header-header.portletHeader {
+    display: block;
+    background-color:transparent;
+}
+
+.portlet .portletHeader a{
+    color:white;
+    padding:7px 20px 4px;
+    display:block;
+}
+.portlet .portletHeader a:hover{
+    text-decoration:none;
+}
+.portlet{
+    border:1px solid #2773ad;
+    
+}
+section.portletContent {
+    padding: 0px;
+}
+.portlet ul {
+    padding: 0px 0px;
+}
+.portlet li{
+    list-style:none;
+}
+.portlet ul > li.portletItem {
+    background: transparent;
+    padding: 4px 14px 8px;
+}
+.portlet ul >   li:not(:last-child)
+{border-bottom:1px solid #ddd;}
+.portletNews a.tile{
+    font-family: Lato, sans-serif;
+    color: #e8e8e8;
+    font-size: 18px;
+}
+    
+/* form styles in the surveys folder */
+
+.section-surveys.portaltype-formfolder {
+    .header-header {
+      display: none;
+   }
+.formHelp {
+    display: block;
+}
+
+.stand-alone-image {
+    width: 300px;
+    height: 100%;
+    }
+   .portlet {
+    border: unset;
+    box-shadow: unset;
+    border: 1px solid #aaa;
+    background-color: #eee;
+    padding: 8px;
+    margin-top:32px;
+   }
+
+   .pfg-form {
+       display: none;
+    }
+
+ .formQuestion.label {
+    font-size: 150%;
+    line-height: 115%;
+    font-weight: 600;
+   }    
+
+ .template-quickedit
+   .pfg-form {
+    display:block;
+}
+
+}
+.template-fg_thankspage_view_p3.section-surveys.portaltype-formfolder.template-quickedit
+.pfg-form {
+    display:none;
+}
+
+.flexbox {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height: 100vw;
+}
+.flexbox:hover img {
+  opacity: 0.28;
+}
+.flexbox .item {
+  position: relative;
+  width: 33.33%;
+}
+.flexbox .item img {
+  width: 100%;
+  display: block;
+  transition: all .8s;
+}
+.flexbox .item .title {
+  position: absolute;
+  top: 48%;
+  left: 0;
+  width: 100%;
+  padding: 0 3%;
+  font-size: 30px;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.42);
+}
+.flexbox .item:hover img {
+  opacity: 1;
+}
+
+.flexbox a.item.item-Folder {
+    display: none;
+}
+
+.flexbox a.item p.title {
+    color: white !important;
+    line-height: 1em;
+}
+
+.flexbox a.item{
+    cursor: pointer;
+    background: black;
+}
+
+
+.flexbox img {
+  opacity: 0.68;
+}
+
+@media (max-width: 860px) {
+  .flexbox {
+    height: 220vw;
+  }
+  .flexbox .item {
+    width: 50%;
+  }
+}
+@media (max-width: 667px) {
+  .flexbox {
+    height: auto !important;
+  }
+  .flexbox .item {
+    width: 100%;
+  }
+}
+.frontend.portaltype-discount_partner .field span {
+    font-size: 24px;
+}
+.frontend.portaltype-discount_partner 
+     #folder-listing {display:none;}
+.fruitpunch{display:none;}
