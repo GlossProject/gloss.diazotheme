@@ -7,7 +7,7 @@ stages:
 
 before_script:
  - HASH=$(echo $CI_COMMIT_SHA | cut -c1-10)
- - sed -i "s/title = [[Theme name]] Theme/title = [[Theme name]] $HASH/g" manifest.cfg
+ - sed -i "s/title = %Theme name% Theme/title = %Theme name% $HASH/g" manifest.cfg
  - sed -i "s/baseVersion/$HASH/g" manifest.cfg
  - sed -i "s/baseVersion/$HASH/g" custom-css.xml
  - sed -i "s/baseVersion/$HASH/g" custom.xml
